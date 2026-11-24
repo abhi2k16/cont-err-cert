@@ -1,0 +1,5 @@
+{
+  "max_rel_deviation_min_delta_vs_closed_form": 3.95095397181561e-05,
+  "loglog_slope_of_min_delta_eps_le_1e-4": 0.4999960437959637,
+  "ell_s1_minus_1_over_eps_median": 0.5000000000000002
+}

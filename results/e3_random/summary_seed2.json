@@ -1,0 +1,202 @@
+{
+  "seed": 2,
+  "n_instances": 1000,
+  "kinds": {
+    "cover": 200,
+    "miss": 200,
+    "over": 200,
+    "plain": 200,
+    "exact": 200
+  },
+  "tol": 1e-09,
+  "statements": {
+    "Lem 2.2 Phi <= Delta^2": {
+      "checked": 3000,
+      "violations": 0,
+      "worst_margin": -1.915750304874883e-16,
+      "nontrivial": 3000,
+      "ratio_min": 0.7500000074213609,
+      "ratio_median": 0.9256560961123503,
+      "ratio_max": 1.0000000000000002
+    },
+    "Lem 2.2 Delta^2 <= 4/3 Phi": {
+      "checked": 3000,
+      "violations": 0,
+      "worst_margin": 9.89514787168109e-09,
+      "nontrivial": 3000,
+      "ratio_min": 0.7499999999999999,
+      "ratio_median": 0.8102361162618665,
+      "ratio_max": 0.9999999901048522
+    },
+    "Rem 3.2 inexact S1": {
+      "checked": 1000,
+      "violations": 0,
+      "worst_margin": 9.495899920099502e-05,
+      "nontrivial": 1000,
+      "ratio_min": 0.4123073215827347,
+      "ratio_median": 0.8796643259178112,
+      "ratio_max": 0.9999611359297514
+    },
+    "Rem 3.2 no 2/sqrt3 if eta(l*)=0": {
+      "checked": 471,
+      "violations": 0,
+      "worst_margin": -1.6640304918429657e-13,
+      "nontrivial": 471,
+      "ratio_min": 0.4535529123191685,
+      "ratio_median": 1.0,
+      "ratio_max": 1.0000000000001663
+    },
+    "Thm 3.1 lower": {
+      "checked": 1000,
+      "violations": 0,
+      "worst_margin": -9.276719457288208e-14,
+      "nontrivial": 1000,
+      "ratio_min": 0.05401299563259232,
+      "ratio_median": 0.7979929437726834,
+      "ratio_max": 1.0000000000000928
+    },
+    "Thm 3.1 upper": {
+      "checked": 1000,
+      "violations": 0,
+      "worst_margin": 5.653758154423278e-05,
+      "nontrivial": 1000,
+      "ratio_min": 0.3394969437518237,
+      "ratio_median": 0.8660254037844386,
+      "ratio_max": 0.9999713632557359
+    },
+    "Thm 3.1 lam.g <= m(A+)||e||": {
+      "checked": 1000,
+      "violations": 0,
+      "worst_margin": 0.0008950242934922074,
+      "nontrivial": 774,
+      "ratio_min": 2.1676813257066241e-19,
+      "ratio_median": 7.492550471726562e-15,
+      "ratio_max": 0.7381701627201582
+    },
+    "Cor 3.3 eff <= 2/sqrt3 s": {
+      "checked": 618,
+      "violations": 0,
+      "worst_margin": 0.13256984059328758,
+      "nontrivial": 618,
+      "ratio_min": 0.3394969437518237,
+      "ratio_median": 0.8660254037844385,
+      "ratio_max": 0.8851911502705595
+    },
+    "Thm 3.7 identity lam.g = -lam_M.Be": {
+      "checked": 1000,
+      "violations": 0,
+      "worst_margin": -3.3110577915791155e-10,
+      "nontrivial": 0
+    },
+    "Thm 3.7 lam.g <= m(M)||e||": {
+      "checked": 1000,
+      "violations": 0,
+      "worst_margin": -1.686155137089065e-10,
+      "nontrivial": 316,
+      "ratio_min": 0.0013082805139705879,
+      "ratio_median": 0.16284449535564544,
+      "ratio_max": 0.7381701627201582
+    },
+    "Thm 3.7 eff bound": {
+      "checked": 1000,
+      "violations": 0,
+      "worst_margin": 0.13256984059328758,
+      "nontrivial": 1000,
+      "ratio_min": 0.06260625189540672,
+      "ratio_median": 0.7080620110833432,
+      "ratio_max": 0.8851911502705595
+    },
+    "Cor 3.8 localized": {
+      "checked": 316,
+      "violations": 0,
+      "worst_margin": -1.6994546061636682e-10,
+      "nontrivial": 316,
+      "ratio_min": 0.04784839529190443,
+      "ratio_median": 1.0,
+      "ratio_max": 1.0000000000440972
+    },
+    "Thm 3.9 upper": {
+      "checked": 2000,
+      "violations": 0,
+      "worst_margin": 5.653758154423278e-05,
+      "nontrivial": 2000,
+      "ratio_min": 0.27155027351522176,
+      "ratio_median": 0.7317651583710405,
+      "ratio_max": 0.9999713632557359
+    },
+    "Thm 3.9 lower (floor)": {
+      "checked": 2000,
+      "violations": 0,
+      "worst_margin": 1.0005842533671643,
+      "nontrivial": 694,
+      "ratio_min": 0.00016894567025268952,
+      "ratio_median": 0.8416464433437576,
+      "ratio_max": 0.9988308109608248
+    },
+    "Thm 3.9 sigma_S > 0 iff A+ not in S": {
+      "checked": 2000,
+      "violations": 0,
+      "worst_margin": Infinity,
+      "nontrivial": 0
+    },
+    "Prop 2.3 energy identity": {
+      "checked": 624,
+      "violations": 0,
+      "worst_margin": -3.2876547820259693e-10,
+      "nontrivial": 0
+    },
+    "Prop 2.3 energy identity (direct J difference, diagnostic)": {
+      "checked": 624,
+      "violations": 0,
+      "worst_margin": -7.881959376388397e-10,
+      "nontrivial": 0,
+      "max_discrepancy_over_rounding_floor": 0.01584462541704844
+    },
+    "Prop 2.3 gap identity (up to rounding)": {
+      "checked": 624,
+      "violations": 0,
+      "worst_margin": -5.30469666176402e-10,
+      "nontrivial": 0,
+      "max_discrepancy_over_rounding_floor": 0.007506017298910902
+    },
+    "Prop 2.3 Delta <= sqrt(2G)": {
+      "checked": 624,
+      "violations": 0,
+      "worst_margin": -1.0014166587471694e-10,
+      "nontrivial": 624,
+      "ratio_min": 0.727761620606046,
+      "ratio_median": 0.9999999999999998,
+      "ratio_max": 1.0000000001001417
+    },
+    "Prop 3.4 S1 = shifted LCP": {
+      "checked": 624,
+      "violations": 0,
+      "worst_margin": -1.032610828890924e-12,
+      "nontrivial": 0
+    },
+    "Prop 3.4 rho = ||u^-u'||_K": {
+      "checked": 624,
+      "violations": 0,
+      "worst_margin": -2.027823232688558e-13,
+      "nontrivial": 0
+    },
+    "Prop 3.4 feasibility": {
+      "checked": 624,
+      "violations": 0,
+      "worst_margin": 9.999996669330927e-10,
+      "nontrivial": 0
+    },
+    "Cor 3.5 Delta = ||e|| (0<=g^<=2g)": {
+      "checked": 439,
+      "violations": 0,
+      "worst_margin": -1.1477294217356978e-10,
+      "nontrivial": 0
+    },
+    "Cor 3.5 l* = lam": {
+      "checked": 439,
+      "violations": 0,
+      "worst_margin": -1.439384962937511e-14,
+      "nontrivial": 0
+    }
+  }
+}

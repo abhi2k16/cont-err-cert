@@ -1,0 +1,20 @@
+{
+  "n_queries": 10,
+  "rate_full": 1.0007156283330614,
+  "omit_i": {
+    "min_ratio_to_floor": 1.0006873190435042,
+    "min_ratio_to_full": 53448.53254677307,
+    "floor_violations": 0,
+    "stall_violations": 0,
+    "sigma_median": 0.0061954570897887525,
+    "delta_at_largest_eps_median": 0.010152419836353219
+  },
+  "omit_A": {
+    "min_ratio_to_floor": 1.0000000000707943,
+    "min_ratio_to_full": 53448.53254677307,
+    "floor_violations": 0,
+    "stall_violations": 0,
+    "sigma_median": 0.006257732037895014,
+    "delta_at_largest_eps_median": 0.010030662449293595
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "R0": {
+    "queries": 400,
+    "share_condition_holds": 0.06,
+    "n_condition": 24,
+    "max_abs_eff_minus_1_where_condition": 1.2878587085651816e-14,
+    "exactness_violations": 0,
+    "n_other": 376,
+    "bound_violations": 0,
+    "eff_median_other": 1.5972524631580622,
+    "eff_max_other": 3.0977068781229766
+  },
+  "R0s_gap": {
+    "queries": 400,
+    "share_condition_holds": 0.46,
+    "n_condition": 184,
+    "max_abs_eff_minus_1_where_condition": 3.042011087472929e-14,
+    "exactness_violations": 0,
+    "n_other": 216,
+    "bound_violations": 0,
+    "eff_median_other": 1.097427214873698,
+    "eff_max_other": 2.217763290196404
+  },
+  "R0s_mult": {
+    "queries": 400,
+    "share_condition_holds": 0.6775,
+    "n_condition": 271,
+    "max_abs_eff_minus_1_where_condition": 1.3766765505351941e-14,
+    "exactness_violations": 0,
+    "n_other": 129,
+    "bound_violations": 0,
+    "eff_median_other": 1.011599021767993,
+    "eff_max_other": 1.3502199520748879
+  }
+}

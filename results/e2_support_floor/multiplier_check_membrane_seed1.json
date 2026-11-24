@@ -1,0 +1,7 @@
+{
+  "cases": 110,
+  "max_outside_Aplus_relative": 0.1171518389813112,
+  "max_difference_on_Aplus_relative": 0.024473650470905398,
+  "max_outside_Aplus_relative_eps_le_1e-3": 0.003839525440931621,
+  "max_difference_on_Aplus_relative_eps_le_1e-3": 0.0008344704152962837
+}
