@@ -1,0 +1,55 @@
+% Section 1: introduction (short-paper outline, RESEARCH_RECORD.md). Statements about the literature mean
+% "not found in the texts read"; gate S1 was closed with a stated risk (two sources unread), see Sec. 7.
+
+\section{Introduction}\label{sec:intro}
+
+A posteriori error estimation plays an important role in assessing the reliability of numerical approximations to contact and obstacle problems.
+In unilateral contact mechanics, an approximate displacement must satisfy non-penetration constraints, while the associated contact forces must
+remain nonnegative and obey complementarity conditions. These inequalities distinguish contact problems from unconstrained elliptic equations and
+introduce additional difficulties in error estimation. Established error certificates address these difficulties by combining an equilibrium
+residual with a complementarity contribution involving a feasible displacement approximation and a nonnegative multiplier. Such estimates have
+been developed in the functional framework for obstacle problems \cite{repin2000,repin2007}, through finite element error estimators
+\cite{veeser2001,braess2005,krause2015}, and for discrete variational inequalities and reduced-order contact models
+\cite{zhang2016cr,zhang2016thesis}. Since the multiplier used in the certificate need not coincide with that of the numerical approximation, it
+can be selected to improve the resulting bound. One established strategy is to minimise a convex quadratic surrogate of the certificate, leading
+to a linear complementarity problem \cite{repin2007,zhang2016thesis}. We refer to this strategy as S1.
+
+The reliability and efficiency of a posteriori error estimators for obstacle and Signorini problems have been investigated extensively. Existing
+finite element analyses establish efficiency estimates involving primal and multiplier errors and identify the influence of contact regions on
+estimator behaviour \cite{veeser2001,braess2005,krause2015}. Reduced-basis methods for variational inequalities have also revealed a possible
+square-root difference between error bounds \cite{haasdonk2012}. A duality approach with strictly feasible approximations reports bounds that numerically follow the convergence rate of the reduced-basis error in two model problems, without deriving an efficiency bound \cite{zhang2014arxiv}. More generally, primal--dual gap formulations and error identities provide rigorous
+relationships among equilibrium residuals, approximation errors and contact-complementarity terms \cite{bartels2025,repin2018}. These results
+establish the mathematical foundations of contact-aware error estimation. They also show that the interaction between displacement accuracy and
+contact consistency is an important consideration when interpreting an error bound.
+
+Despite these developments, the efficiency of the particular feasible-pair certificate obtained through convex-surrogate multiplier optimisation
+remains less explicitly characterised. To the best of our knowledge, the literature does not provide an explicit characterisation of when the
+optimised certificate coincides with the true displacement error. Furthermore, it neither demonstrates that convergence-rate degradation may
+persist under unrestricted multiplier optimisation nor analyses the asymptotic certificate floor caused by omitted strictly active contact-force
+components. While established primal--dual energy identities provide closely related estimates, they leave open key questions regarding the
+surrogate-minimising multiplier.
+
+To address this gap, the present study investigates the relationship between the optimised certificate, the true displacement error and the
+complementarity between exact contact forces and approximate contact gaps. We first establish an efficiency estimate that quantifies this relationship
+for a general symmetric positive-definite inner product. For the stiffness-based inner product, we interpret the surrogate-minimising multiplier as
+the contact-force solution of a problem with a shifted obstacle. This interpretation enables a precise characterisation of the conditions under
+which the optimised multiplier recovers the exact multiplier and the resulting certificate equals the true energy error. We then examine the
+limitations of multiplier optimisation through an explicit counterexample demonstrating unavoidable worst-case square-root degradation within the
+considered certificate family. A separate analysis shows that restricting the multiplier support so that a strictly active contact constraint is
+omitted can produce a positive asymptotic certificate floor. These findings are complemented by bounds that quantify the contribution of missed
+contact constraints to certificate efficiency.
+
+The theoretical results are examined numerically using two finite element contact benchmarks, controlled approximation sequences and randomly
+generated constrained quadratic problems. We also consider elementary feasibility and snap-to-contact corrections of reduced-order predictions to
+illustrate the relationship between active-set consistency, certificate efficiency and displacement accuracy. The investigation is analytical in
+scope: it does not propose a new error certificate, multiplier-selection algorithm or reduced-order method. Moreover, the conditions for exact
+certification involve quantities from the unknown full-order solution and are therefore intended to explain certificate behaviour rather than
+provide a directly applicable online exactness test. The numerical experiments are designed to verify the derived properties rather than demonstrate
+computational acceleration.
+
+The remainder of the paper is organised as follows. Section~\ref{sec:setting} presents the mathematical formulation and feasible-pair error
+certificate. Section~\ref{sec:analysis} investigates certificate efficiency and conditions for exact certification. Section~\ref{sec:failure}
+examines square-root convergence degradation, missed contact constraints and the effects of restricted multiplier support.
+Section~\ref{sec:results} provides numerical verification of the theoretical results, while Section~\ref{sec:application} illustrates their
+application to corrections of reduced-order contact predictions. Section~\ref{sec:conclusions} summarises the principal findings, limitations
+and directions for future research. Appendix~\ref{app:e3} presents the random-instance verification results and supplementary numerical diagnostics.

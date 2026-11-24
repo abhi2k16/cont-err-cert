@@ -14,7 +14,7 @@ After changing an original, refresh this folder with `bash sync_from_repo.sh`. D
 | `code/` | The seven scripts of the current line: `e1.py`, `e2.py`, `e2_mult.py`, `e3.py`, `halfrate.py` (experiments) and `tables.py`, `figures.py` (tables and figures from saved results) |
 | `results/` | Saved results of those experiments: `e1_exactness/`, `e2_support_floor/`, `e3_random/`, `e_halfrate/` (NPZ arrays and JSON summaries; 3 seeds) |
 | `notes/` | `RESEARCH_RECORD.md` (start here), `PROOF_AUDIT_GUIDE.md`, `PROOF_READER_NOTE.md` (cover note for a proof reader), `CLAIM_SHEET.md`, `CLAIM_SHEET_AUDIT_RESULTS.md` (literature audit), `THEOREM_certificate_efficiency.md`, `ANALYSIS_T1_T3.md`, `SHORT_PAPER_SCOPE.md` (previous scope file with the pre-registered criteria and dated log) |
-| `literature/` | PDFs of the sources relevant to the manuscript (the two PDFs belonging to closed lines are left out) |
+| `literature/` | Local copies of source PDFs; not published in this repository. The references remain in `manuscript/refs.bib`. |
 
 ## Where to start
 

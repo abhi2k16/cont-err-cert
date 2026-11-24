@@ -1,0 +1,114 @@
+% Section 2: setting and the feasible-pair certificate (known results, cited).
+
+\section{Setting and the feasible-pair certificate}\label{sec:setting}
+
+\subsection{Full-order contact problem}
+The discrete frictionless unilateral contact problem is considered:
+\begin{equation}\label{eq:fom}
+  \mK\vu-\mB\T\vlam=\vf,\qquad \vg:=\mB\vu-\vc\ge\boldsymbol 0,\qquad \vlam\ge\boldsymbol 0,\qquad \vlam\T\vg=0,
+\end{equation}
+Here, $\vu\in\mathbb R^{N}$ denotes the displacement and $\vlam\in\mathbb R^{n_c}$ the contact forces. The matrix $\mK$ is assumed symmetric
+positive definite and $\mB\in\mathbb R^{n_c\times N}$ has full row rank. Positive definiteness gives a strictly convex energy and hence a unique
+displacement $\vu$; full row rank makes the constraints feasible for every $\vc$ (so $\vu$ exists) and $\mB\T$ injective, which gives a unique multiplier
+$\vlam=(\mB\mB\T)^{-1}\mB(\mK\vu-\vf)$. These assumptions therefore ensure existence and uniqueness of the primal--dual solution $(\vu,\vlam)$. The problem data may depend on a parameter
+$\vmu$, which is suppressed when fixed. The strictly active set $\Aplus$ and the contact set $\Acon$ are defined by
+\begin{equation}\label{eq:sets}
+  \Aplus:=\{i:\lambda_i>0\}\subseteq\Acon:=\{i:g_i=0\}
+\end{equation}
+for the full-order solution.
+
+A Galerkin reduced-order model \cite{balajewicz2016} approximates $\vu\approx\ut=\mV\vu_r$ and
+$\vlam\approx\lt=\mW\vlam_r$ using primal and dual bases and solves the projected complementarity problem. The reconstructed pair satisfies
+the reduced conditions but may violate full-order feasibility.
+Section~\ref{sec:application} constructs a feasible displacement $\uh$, with $\gh:=\mB\uh-\vc\ge\boldsymbol 0$. The analysis in
+Sections~\ref{sec:setting}--\ref{sec:failure} applies to any feasible approximation, with error $\ve:=\vu-\uh$. Errors and certificates are
+measured relative to the full-order finite element solution, excluding the discretisation error of the continuous problem; the latter is addressed by finite element a posteriori estimators
+\cite{veeser2001,braess2005,weiss2010,krause2015}.
+
+\subsection{Inner product and coercivity constants}
+Let $\mX$ be symmetric positive definite and let $0<\alpha_X\le\gamma_X$ satisfy
+\begin{equation}\label{eq:equiv}
+  \alpha_X\,\vv\T\mX\vv\le\vv\T\mK\vv\le\gamma_X\,\vv\T\mX\vv\qquad\text{for all }\vv\in\mathbb R^N,
+\end{equation}
+and define $s:=(\gamma_X/\alpha_X)^{1/2}\ge1$. For constant stiffness, choosing $\mX=\mK$ gives $\alpha_X=\gamma_X=s=1$.
+
+For an affine stiffness $\mK(\vmu)=\sum_q\theta_q(\vmu)\mK_q$, with $\theta_q\ge0$ and $\mK_q$ symmetric positive semidefinite, the reference
+matrix is chosen as $\mX=\mK(\bar\vmu)$. If $\theta_q(\bar\vmu)>0$ and $\theta_q(\vmu)>0$ for every nonzero $\mK_q$, the minimum and maximum coefficient ratios
+provide positive spectral-equivalence constants without eigenvalue computations. Vanishing coefficients require a separate positive coercivity
+bound. When all coefficients are positive, \eqref{eq:equiv} holds with
+$\alpha_X=\min_q\theta_q(\vmu)/\theta_q(\bar\vmu)$ and $\gamma_X=\max_q\theta_q(\vmu)/\theta_q(\bar\vmu)$.
+
+The Euclidean choice $\mX=\mI$ serves as a baseline. The extreme eigenvalues of $\mK$ give $s=\kappa(\mK)^{1/2}$; conservative eigenvalue
+bounds generally yield a larger value.
+
+\subsection{The feasible-pair certificate}
+For a multiplier candidate $\vell\ge\boldsymbol 0$ define
+\begin{equation}\label{eq:certificate}
+  \rhob(\vell):=\frac{\normXi{\vf+\mB\T\vell-\mK\uh}}{\sqrt{\alpha_X}},\qquad
+  \eta(\vell):=\vell\T\gh,\qquad
+  \Dstar(\vell):=\tfrac12\Big(\rhob(\vell)+\sqrt{\rhob(\vell)^2+4\eta(\vell)}\Big).
+\end{equation}
+
+The following established result provides an upper bound on the energy-norm error for any feasible displacement approximation
+\cite[Prop.~4.3]{zhang2016cr}, \cite[Prop.~3.3.6]{zhang2016thesis}.
+
+\begin{proposition}[feasible-pair error bound]\label{prop:certificate}
+Let $\uh$ be a feasible displacement approximation, $\gh\ge\boldsymbol 0$. Then, for every nonnegative multiplier $\vell\ge\boldsymbol 0$, $\normK{\ve}\le\Dstar(\vell)$.
+\end{proposition}
+Related functional bounds for obstacle problems involve arbitrary nonnegative multipliers, equilibrium residuals, and complementarity terms
+\cite[(2.12)--(2.13)]{repin2007}. Finite element counterparts appear in \cite[Lemma~1]{braess2005} and \cite[Sec.~4.2]{krause2015}.
+\begin{proof}
+By \eqref{eq:fom}, $\mK\ve=\vr+\mB\T(\vlam-\vell)$ with $\vr:=\vf+\mB\T\vell-\mK\uh$, and $\mB\ve=\vg-\gh$. Hence
+$\normK{\ve}^2=\ve\T\vr+(\vg-\gh)\T(\vlam-\vell)$. The second term equals
+$\vg\T\vlam-\vg\T\vell-\gh\T\vlam+\gh\T\vell\le\eta(\vell)$, since $\vg\T\vlam=0$ and all other products of non-negative vectors
+are non-negative. With $\ve\T\vr\le\normK{\ve}\normKi{\vr}\le\normK{\ve}\rhob(\vell)$ by \eqref{eq:equiv}, $\normK{\ve}$ satisfies
+$\normK{\ve}^2-\rhob\normK{\ve}-\eta\le0$, whose positive root is $\Dstar(\vell)$.
+\end{proof}
+
+\subsection{Minimum-residual multiplier}
+Following the established surrogate-minimisation approach \cite{zhang2016thesis}, the nonnegative multiplier is selected by solving
+\begin{equation}\label{eq:phi}
+  \Phi(\vell):=\rhob(\vell)^2+\eta(\vell),\qquad \lmr:=\operatorname*{arg\,min}_{\vell\ge\boldsymbol 0}\Phi(\vell).
+\end{equation}
+Since $\mB$ has full row rank, the Hessian $2\mB\mX^{-1}\mB\T/\alpha_X$ is positive definite. Hence $\Phi$ is strictly convex and has a unique
+minimiser $\lmr$, characterised by a linear complementarity problem with $n_c$ unknowns. Related functional-majorant minimisations for continuous
+obstacle problems are established in \cite{repin2000,repin2007}.
+
+\begin{lemma}[surrogate--certificate equivalence]\label{lem:phi}
+For every nonnegative multiplier $\vell\ge\boldsymbol 0$, $\Phi(\vell)\le\Dstar(\vell)^2\le\frac43\Phi(\vell)$.
+\end{lemma}
+\begin{proof}
+Let $\rho=\rhob(\vell)$, $\eta=\eta(\vell)$ and $P=\rho^2+\eta$. If $P=0$, then $\rho=\eta=0$, $\Dstar=0$, and both bounds hold trivially. Otherwise, ${\Dstar}^2=\rho\Dstar+\eta\ge P$, since $\Dstar\ge\rho$. For the upper bound, $\sqrt{\rho^2+4\eta}=\sqrt{4P-3\rho^2}$, so
+\[
+  \Dstar=\tfrac12\Big(\rho+\sqrt{4P-3\rho^2}\Big),
+\]
+which, as a function of $\rho\in[0,\sqrt P]$, attains its maximum $2\sqrt{P/3}$ at $\rho=\sqrt{P/3}$. Consequently, ${\Dstar}^2\le4P/3\le\frac43\Phi$.
+\end{proof}
+
+\subsection{Relation to the primal--dual gap}
+Equation \eqref{eq:fom} represents the optimality conditions for minimising $J(\vv):=\frac12\vv\T\mK\vv-\vf\T\vv$ subject to $\mB\vv\ge\vc$, with
+dual function $\mathcal D(\vell):=-\frac12(\vf+\mB\T\vell)\T\mK^{-1}(\vf+\mB\T\vell)+\vell\T\vc$ for $\vell\ge\boldsymbol 0$.
+
+The primal--dual gap $J(\uh)-\mathcal D(\vell)$ provides an established basis for error estimation \cite{zhangs2020}. For $\mX=\mK$, it involves the same residual and complementarity terms
+as the feasible-pair certificate. The identities in Proposition~\ref{prop:gap} are closely related to established primal--dual gap and energy identities \cite{bartels2025}. They also show that, for the same
+multiplier, the certificate does not exceed the corresponding gap-based error bound.
+
+\begin{proposition}\label{prop:gap}
+Let $\uh$ be feasible, $\vell\ge\boldsymbol 0$, $\mX=\mK$, and $G(\uh,\vell):=J(\uh)-\mathcal D(\vell)$. Then
+\begin{equation}\label{eq:gap}
+  G(\uh,\vell)=\tfrac12\rhob(\vell)^2+\eta(\vell),\qquad
+  J(\uh)-J(\vu)=\tfrac12\normK{\ve}^2+\vlam\T\gh,\qquad
+  \normK{\ve}\le\Dstar(\vell)\le\sqrt{2G(\uh,\vell)},
+\end{equation}
+with equality in the last inequality if and only if $\eta(\vell)=0$.
+\end{proposition}
+\begin{proof}
+With $\vw:=\vf+\mB\T\vell$, $J(\uh)-\mathcal D(\vell)=\frac12\uh\T\mK\uh-\vw\T\uh+\frac12\vw\T\mK^{-1}\vw+\vell\T(\mB\uh-\vc)=\frac12\normKi{\mK\uh-\vw}^2+\vell\T\gh$.
+Next, $J(\uh)-J(\vu)=\frac12\normK{\ve}^2+(\mK\vu-\vf)\T(\uh-\vu)$ and $\mK\vu-\vf=\mB\T\vlam$, $\mB(\uh-\vu)=\gh-\vg$, $\vlam\T\vg=0$. Finally,
+${\Dstar}^2=\rhob\Dstar+\eta\le\frac12(\rhob^2+{\Dstar}^2)+\eta$ gives ${\Dstar}^2\le\rhob^2+2\eta=2G$, with equality if and only if $\rhob=\Dstar$, i.e.
+$\eta=0$; the first inequality is Proposition~\ref{prop:certificate}.
+\end{proof}
+
+The second identity in \eqref{eq:gap} identifies $\vlam\T\gh$ as the contribution to the primal energy difference beyond one-half of the squared
+energy error. Its continuous counterpart appears in \cite{bartels2025}. For $\mX=\mK$, the lower bounds on the certificate also apply to the
+corresponding gap-based error bound, since $\sqrt{2G}\ge\Dstar$. For general $\mX$, the residual norms differ, and this transfer need not hold.

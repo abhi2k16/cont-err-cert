@@ -1,0 +1,75 @@
+% Section 6: application. Corrections of reduced-order predictions as consistent / inconsistent feasible approximations.
+
+\section{Application: corrections of reduced-order predictions}\label{sec:application}
+
+The preceding analysis applies to any feasible displacement approximation. This section examines elementary corrections of Galerkin ROM predictions to illustrate the effects of active-set consistency on certificate efficiency and displacement accuracy. Let $\et:=\vu-\ut$ and $\gt:=\mB\ut-\vc$ denote the ROM displacement error and contact gap, respectively, and let $\pos{x}:=\max(x,0)$ componentwise.
+
+\subsection{Right-inverse repair and snap-to-contact}
+
+Define $\Bp:=\mB\T(\mB\mB\T)^{-1}$, so that $\mB\Bp=\mI$. The right inverse is evaluated using a thin QR factorisation of $\mB\T$, or directly when $\mB$ selects individual degrees of freedom. For a prescribed active set $\Ahat$, the corrected displacement is defined by
+\begin{equation}\label{eq:snap}
+  d_i:=\begin{cases}-\tilde g_i,& i\in\Ahat,\\ \pos{-\tilde g_i},& i\notin\Ahat,\end{cases}\qquad \uh:=\ut+\Bp\vd .
+\end{equation}
+For $\Ahat=\emptyset$, the correction reduces to the right-inverse feasibility repair R0, which eliminates penetration. For nonempty $\Ahat$, the snap-to-contact correction R0s additionally enforces zero gaps on the selected rows. Since $\mB\Bp=\mI$,
+\begin{equation}\label{eq:snap-gap}
+  \hat g_i=0\ \ (i\in\Ahat),\qquad \hat g_i=\pos{\tilde g_i}\ \ (i\notin\Ahat),
+\end{equation}
+ensuring feasibility for any $\Ahat$. Proposition~\ref{prop:certificate} therefore applies.
+
+\subsection{Consistency and missed rows}
+
+\begin{proposition}[Active-set consistency through snapping]\label{prop:snap}
+If $\Aplus\subseteq\Ahat$, the correction \eqref{eq:snap} satisfies the bounded-effectivity estimate \eqref{eq:eff-consistent}.
+\end{proposition}
+\begin{proof}
+By \eqref{eq:snap-gap}, $\hat g_i=0$ on $\Ahat\supseteq\Aplus$; apply Corollary~\ref{cor:effectivity}(b).
+\end{proof}
+
+When $\Ahat$ does not contain all strictly active constraints, the missed rows can be identified directly from the ROM prediction.
+
+\begin{corollary}[missed rows of a snapped correction]\label{cor:snap-missed}
+For \eqref{eq:snap}, $\Miss(\uh)=\{i\in\Aplus\setminus\Ahat:\tilde g_i>0\}$, and
+\begin{equation}\label{eq:snap-missed}
+  \vlam\T\gh=\sum_{i\in\Miss}\lambda_i\tilde g_i=-\vlam_{\Miss}\T\mB\et=-\vlam_{\Miss}\T\mB\ve\le m(\Miss)\min\big(\normK{\ve},\normK{\et}\big).
+\end{equation}
+\end{corollary}
+\begin{proof}
+By \eqref{eq:snap-gap}, $\hat g_i>0$ exactly for $i\notin\Ahat$ with $\tilde g_i>0$, and then $\hat g_i=\tilde g_i$. On $\Aplus$, $g_i=0$, so
+$\tilde g_i=-(\mB\et)_i$ and $\hat g_i=-(\mB\ve)_i$. The bound is the Cauchy--Schwarz inequality, as in Theorem~\ref{thm:missed}.
+\end{proof}
+
+For R0, the missed rows correspond to strictly active constraints predicted as open by the ROM. Their contribution to the complementarity term is bounded by the ROM displacement error.
+
+\subsection{The accuracy cost of snapping}
+
+Although snapping can improve certificate efficiency, it may increase the displacement error by enforcing additional contact constraints.
+
+\begin{proposition}[cost of snapping]\label{prop:snap-cost}
+Let $\vp$ have entries $p_i=\pos{\tilde g_i}$ for $i\in\Ahat$ and $p_i=0$ otherwise, let $\uh_{R0}$ and $\uh_{s}$ be the corrections
+\eqref{eq:snap} with $\emptyset$ and $\Ahat$, and $\beta:=\norm{\mK^{1/2}\Bp}_2$. Then
+\begin{equation}\label{eq:snap-cost}
+  \uh_{s}=\uh_{R0}-\Bp\vp,\qquad \big|\normK{\vu-\uh_s}-\normK{\vu-\uh_{R0}}\big|\le\normK{\Bp\vp}\le\beta\,\norm{\vp}_2 .
+\end{equation}
+Moreover, $p_i\le|(\mB\et)_i|$ for $i\in\Ahat\cap\Acon$ and $p_i\le g_i+|(\mB\et)_i|$ for $i\in\Ahat\setminus\Acon$.
+\end{proposition}
+\begin{proof}
+The two corrections differ only on $\Ahat$, where $d_i^{s}-d_i^{R0}=-\tilde g_i-\pos{-\tilde g_i}=-\pos{\tilde g_i}$. The bound is the triangle
+inequality. Finally $\tilde g=\vg-\mB\et$ with $g_i=0$ on $\Acon$.
+\end{proof}
+
+The correction cost depends on whether the snapped constraints belong to the exact contact set. Constraints in contact contribute at the order of the ROM error, whereas over-snapped constraints may introduce errors proportional to their nonzero exact gaps. Multiplier-based selection does not directly control this contribution, while gap-based selection provides an explicit bound.
+
+\begin{corollary}[gap rule]\label{cor:gap-rule}
+For $\Ahat_t:=\{i:\tilde g_i\le t\}$ with $t\ge0$:
+\begin{enumerate}
+\item[(a)] $\normK{\vu-\uh_s}\le\normK{\vu-\uh_{R0}}+\beta\,t\,|\Ahat_t|^{1/2}$, whatever the true contact set;
+\item[(b)] $\Miss(\uh_s)\subseteq\{i\in\Aplus:|(\mB\et)_i|>t\}$; in particular, $\norm{\mB\et}_\infty\le t$ implies $\Aplus\subseteq\Ahat_t$ and
+$\mathrm{eff}\le\frac2{\sqrt3}s$.
+\end{enumerate}
+\end{corollary}
+\begin{proof}
+(a) Every $p_i\le t$; apply Proposition~\ref{prop:snap-cost}. (b) A missed row has $\tilde g_i>t$, and $\tilde g_i=-(\mB\et)_i$ on $\Aplus$.
+\end{proof}
+
+The threshold $t$ balances active-set consistency against displacement accuracy. Increasing $t$ reduces the possibility of missed constraints but increases the upper bound on the correction error. The natural scale is $\norm{\mB\et}_\infty$, which is unavailable online; consequently, Section~\ref{sec:results} uses a fixed threshold. The constant $\beta$ depends on the mesh and, for a node-selection matrix $\mB$ with unit entries, satisfies $(\Bp)\T\mK\Bp=\mB\mK\mB\T$.
+
