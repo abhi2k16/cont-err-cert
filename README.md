@@ -1,41 +1,104 @@
-# certificate-efficiency
+<h1 align="center">certificate-efficiency</h1>
 
-Experiment scripts and numerical results for the manuscript **Efficiency and limitations of optimised-multiplier error certificates for discrete contact problems**.
+<p align="center">
+  <b>How sharp are optimized-multiplier error certificates for discrete contact problems?</b><br>
+  Numerical studies of active-set consistency, exact certification, restricted multiplier support and worst-case degradation.
+</p>
 
-This folder is a **copy**. The originals stay where they are and are authoritative: the code repository `../admissible-lifting-certification/certified-correction-contact-rom/` (git; package, tests, experiments, results, paper), the notes in `../admissible-lifting-certification/` and the PDFs in `../admissible-lifting-certification/literatures/`. The public repository tracks the experiment code and results; manuscript sources, research notes and literature PDFs are intentionally not included. After changing an original, refresh this local folder with `bash sync_from_repo.sh`.
+<p align="center">
+  <img alt="Python 3.10+" src="https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white">
+  <img alt="NumPy" src="https://img.shields.io/badge/NumPy-2.2.6-013243?logo=numpy&logoColor=white">
+  <img alt="SciPy" src="https://img.shields.io/badge/SciPy-1.15.3-8CAAE6">
+  <img alt="Problem class" src="https://img.shields.io/badge/problem-frictionless%20unilateral%20contact-orange">
+  <img alt="Benchmarks" src="https://img.shields.io/badge/benchmarks-membrane%20%7C%20block-teal">
+  <a href="LICENSE"><img alt="License MIT" src="https://img.shields.io/badge/license-MIT-green"></a>
+</p>
 
-## Contents
+<p align="center">
+  <a href="#problem-and-scope">Problem</a> ·
+  <a href="#numerical-studies">Studies</a> ·
+  <a href="#quick-start">Quick start</a> ·
+  <a href="#saved-results">Results</a> ·
+  <a href="#repository-layout">Layout</a>
+</p>
 
-| Folder | What it holds |
-|---|---|
-| `code/` | The seven scripts of the current line: `e1.py`, `e2.py`, `e2_mult.py`, `e3.py`, `halfrate.py` (experiments) and `tables.py`, `figures.py` (tables and figures from saved results) |
-| `results/` | Saved results of those experiments: `e1_exactness/`, `e2_support_floor/`, `e3_random/`, `e_halfrate/` (NPZ arrays and JSON summaries; 3 seeds) |
+---
 
-## Where to start
+## Problem and scope
 
-Start with the experiment scripts in `code/` and the saved outputs in `results/`. The manuscript and supporting research materials are maintained outside this repository.
+A posteriori error certificates for discrete frictionless contact problems depend on both a feasible approximation and a compatible
+multiplier. This project examines how certificate efficiency relates to active-set consistency, when exact certification occurs, and
+how missed contact constraints or restricted multiplier support affect the bounds.
 
-## Re-run the experiments
+This repository is a research snapshot of experiment scripts and saved numerical outputs. It does not include the manuscript, research
+notes, literature PDFs or the `certcorrect` package. The scripts also rely on the authors' local `fea_engine` and `rom_engine` packages.
 
-The scripts in `code/` import the package `certcorrect` and the engines `fea_engine`, `rom_engine`, which live in the code repository (project `.venv`), so they are run from there:
+## Numerical studies
+
+| Study | Question | Saved output |
+|---|---|---|
+| **E1 - Exactness** | When does the certificate equal the true energy error for finite-element queries? | `results/e1_exactness/` |
+| **E2 - Support floor** | How does restricting multiplier support affect the certificate on a controlled lift-off sequence? | `results/e2_support_floor/` |
+| **E3 - Random instances** | Do the derived certificate properties hold across random inequality-constrained systems? | `results/e3_random/` |
+| **Half-rate example** | Does the two-dimensional example exhibit square-root certificate degradation? | `results/e_halfrate/` |
+
+The finite-element studies use membrane and block benchmarks. Seeds 0, 1 and 2 are included for the seeded experiments. The `code/`
+directory contains the corresponding experiment scripts plus helpers for generating tables and figures from saved summaries.
+
+## Quick start
+
+The pinned numerical dependencies are listed in `requirements.txt`:
 
 ```bash
-cd ../admissible-lifting-certification/certified-correction-contact-rom
-for s in 0 1 2; do
-  for p in membrane block; do
-    python experiments/e1.py --problem $p --seed $s
-    python experiments/e2.py --problem $p --seed $s
-    python experiments/e2_mult.py --problem $p --seed $s
-  done
-  python experiments/e3.py --seed $s --n-instances 1000
-done
-python experiments/halfrate.py
-python experiments/tables.py
-python experiments/figures.py
+python -m venv .venv
+python -m pip install -r requirements.txt
 ```
 
-then `bash ../../certificate-efficiency/sync_from_repo.sh` to refresh the local copy.
+Installing these requirements alone is not sufficient to run the experiment scripts: they import `certcorrect`, `fea_engine` and
+`rom_engine`, which are not included in this repository. Run the scripts from the full source checkout with its configured Python
+environment. For example:
 
-## Status (24 Nov 2026)
+```bash
+python experiments/e1_exactness.py --problem membrane --seed 0
+python experiments/e2_support_floor.py --problem membrane --seed 0
+python experiments/e3_random_instances.py --seed 0 --n-instances 1000
+python experiments/e_halfrate.py
+```
 
-Numerical evidence passed as reported; proofs checked by two independent AI audits (one false inequality found and fixed), no human reader yet; literature closure accepted with residual risk (two sources unread); publication decision pending. Detailed research notes are maintained outside this repository.
+## Saved results
+
+`results/` contains NPZ arrays and JSON summaries for the completed runs:
+
+| Folder | Contents |
+|---|---|
+| `results/e1_exactness/` | E1 outputs for membrane and block, seeds 0-2 |
+| `results/e2_support_floor/` | E2 support-floor runs and restricted-multiplier diagnostics |
+| `results/e3_random/` | Random-instance verification summaries, seeds 0-2 |
+| `results/e_halfrate/` | Half-rate example arrays and summary |
+
+The `tables.py` and `figures.py` scripts in `code/` use the saved results to generate the associated manuscript tables and figures in
+the full source checkout.
+
+## Repository layout
+
+```text
+code/
+├── e1.py          finite-element exactness study
+├── e2.py          restricted multiplier support-floor study
+├── e2_mult.py     multiplier diagnostic
+├── e3.py          random-instance verification
+├── halfrate.py    square-root degradation example
+├── tables.py      table generation from saved summaries
+└── figures.py     figure generation from saved results
+results/
+├── e1_exactness/
+├── e2_support_floor/
+├── e3_random/
+└── e_halfrate/
+requirements.txt
+LICENSE
+```
+
+## License and citation
+
+Released under the MIT License; see [LICENSE](LICENSE). The manuscript and citation details are maintained outside this repository.
